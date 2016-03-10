@@ -1,0 +1,43 @@
+<div class="list-body container">
+    <header>Minneapolis, MN: {{myData.length}} <span ng-show="myData.length>1">Apartments</span><span ng-show="myData.length<=1">Apartment</span></header>
+    <div class="row">
+        <div class="sort">
+            <span><strong>Search: </strong><input ng-model="searchText"></span>
+            <button ng-click="order('popularity')">Popularity <span class="sort-order" ng-show="predicate === 'popularity'" ng-class="{reverse:reverse}"></span></button>
+            <button ng-click="order('price')">Price <span class="sort-order" ng-show="predicate === 'price'" ng-class="{reverse:reverse}"></span></button>
+        </div><br>
+
+        <table class="list">
+            <tr ng-repeat="x in myData|limitTo : pageSize : first|orderBy:predicate:reverse|filter:searchText">
+                <div class="shadow">
+                    <div class="row">
+                        <td class="img-td col-sx-5 col-sm-5 col-md-6 col-lg-4">
+                            <img class= "img" ng-src="image/{{x.image}}">
+                        </td>
+                    </div>
+                    <div class="row">
+                        <td class="list-td col-sx-7 col-sm-7 col-md-6 col-lg-8">
+                            <a href="#/{{x.ID}}" style="text-decoration:none">
+                                <div class="detail">
+                                    <div class="name">
+                                         <strong>{{x.name}}</strong>
+                                    </div>
+                                    <hr size="0">
+                                    <div class="description">
+                                        {{x.description}}
+                                    </div>
+                                    <br>
+                                </div>
+                                <div class="price">From <span class="price-num">{{x.price|currency }}</span><br>USD/Month</div>
+                            </a>
+                        </td>
+                    </div>
+                </div>
+            </tr>
+        </table>
+    </div>
+    <div class="pagination">
+        <button ng-disabled="first<=1" ng-click="prePage()"> Pre Page</button><strong> --{{pageNum}} <span ng-show="pageNum<=1">Page</span><span ng-show="pageNum>1">Pages</span>--</strong>
+        <button ng-disabled="(first+pageSize)>=myData.length" ng-click="nxtPage()"> Next Page</button>
+    </div>
+</div>

@@ -1,3 +1,5 @@
+// Author: Jun Fan
+// Date:   1/21/2015
 var app = angular.module('myApp', ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
